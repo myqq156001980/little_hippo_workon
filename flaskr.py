@@ -18,6 +18,7 @@ from PIL import Image
 from os.path import join
 from datetime import datetime
 import config
+import math
 
 # create our little application :)
 app = Flask(__name__)
@@ -34,6 +35,8 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 date_list = []
 image_dict = {}
+page = 10
+total_pages = 0
 
 
 def init_image_info():
@@ -59,6 +62,9 @@ def init_image_info():
                     tmp_set.add(join(os.path.basename(dir_path), filename))
                     image_dict[shoot_date] = tmp_set
 
+    global total_pages
+    total_pages = math.ceil(len(date_list) / 10)
+
 
 # @app.route('/')
 # def show_entries():
@@ -68,9 +74,13 @@ def init_image_info():
 #     return render_template('show_entries.html', entries=entries)
 
 
-@app.route('/')
-def show_entries():
-    return render_template('test.html', date_list=date_list, image_dict=image_dict)
+@app.route('/<current_page>')
+def show_image(current_page):
+    return render_template('test.html',
+                           date_list=date_list,
+                           image_dict=image_dict,
+                           total_pages=total_pages,
+                           current_page=int(current_page))
 
 
 # @app.route('/add', methods=['POST'])
