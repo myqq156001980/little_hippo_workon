@@ -37,6 +37,7 @@ date_list = []
 image_dict = {}
 page = 10
 total_pages = 0
+birthday = datetime.strptime(config.birthday, '%Y-%m-%d')
 
 
 def init_image_info():
@@ -50,10 +51,13 @@ def init_image_info():
             if filename.endswith('.jpg'):
                 pic = Image.open(join(dir_path, filename))
                 image_exif = pic._getexif()
+
                 shoot_time = datetime.strptime(image_exif[306], "%Y:%m:%d %H:%M:%S")
+
                 shoot_date = datetime.strftime(shoot_time, "%Y-%m-%d")
                 if shoot_date not in date_list:
-                    date_list.append(shoot_date)
+                    days = (shoot_time - birthday).days
+                    date_list.append([shoot_date, days])
                     tmp_set = set()
                     tmp_set.add(join(os.path.basename(dir_path), filename))
                     image_dict[shoot_date] = tmp_set
@@ -64,6 +68,7 @@ def init_image_info():
 
     global total_pages
     total_pages = math.ceil(len(date_list) / 10)
+    date_list.sort(key=lambda x: x[1], reverse=True)
 
 
 # @app.route('/')
@@ -76,11 +81,17 @@ def init_image_info():
 
 @app.route('/<current_page>')
 def show_image(current_page):
+    result_list = date_list[(int(current_page) - 1) * 10: int(current_page) * 10]
     return render_template('test.html',
-                           date_list=date_list,
+                           date_list=result_list,
                            image_dict=image_dict,
                            total_pages=total_pages,
                            current_page=int(current_page))
+
+
+@app.route('/')
+def home_page():
+    return redirect('/1')
 
 
 # @app.route('/add', methods=['POST'])
