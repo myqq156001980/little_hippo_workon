@@ -1,17 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-    Flaskr
-    ~~~~~~
-
-    A microblog example application written as Flask tutorial with
-    Flask and sqlite3.
-
-    :copyright: (c) 2015 by Armin Ronacher.
-    :license: BSD, see LICENSE for more details.
-"""
 
 import os
-from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash
 from PIL import Image
@@ -69,14 +58,6 @@ def init_image_info():
     global total_pages
     total_pages = math.ceil(len(date_list) / 10)
     date_list.sort(key=lambda x: x[1], reverse=True)
-
-
-# @app.route('/')
-# def show_entries():
-#     db = get_db()
-#     cur = db.execute('select title, text from entries order by id desc')
-#     entries = cur.fetchall()
-#     return render_template('show_entries.html', entries=entries)
 
 
 @app.route('/<current_page>')
