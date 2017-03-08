@@ -111,4 +111,4 @@ def home_page():
 
 if __name__ == '__main__':
     init_image_info()
-    app.run()
+    app.run(debug=True)
