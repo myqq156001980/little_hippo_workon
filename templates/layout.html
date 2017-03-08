@@ -3,7 +3,20 @@
 <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stickup.css') }}">
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/stickUp.min.js') }}"></script>
+<script type="text/javascript">
+    //initiating jQuery
+    jQuery(function ($) {
+        $(document).ready(function () {
+            //enabling stickUp on the '.navbar-wrapper' class
+            $('.pages').stickUp();
+        });
+    });
+
+</script>
+
 
 {% block body %}{% endblock %}
-

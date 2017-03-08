@@ -25,7 +25,7 @@
             </li>
         {% endfor %}
 
-        <nav aria-label="Page navigation">
+        <nav aria-label="Page navigation" class="pages">
             <ul class="pagination">
                 <li>
                     <a href="{{ current_page-1 }}" aria-label="Previous">
@@ -67,3 +67,11 @@
 
     </ul>
 {% endblock %}
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $(document).ready(function () {
+            $('.pages').stickUp();
+        });
+    });
+</script>
