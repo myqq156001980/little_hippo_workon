@@ -63,7 +63,7 @@ def init_image_info():
 @app.route('/<current_page>')
 def show_image(current_page):
     result_list = date_list[(int(current_page) - 1) * 10: int(current_page) * 10]
-    return render_template('test.html',
+    return render_template('hippo_show.html',
                            date_list=result_list,
                            image_dict=image_dict,
                            total_pages=total_pages,
