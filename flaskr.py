@@ -55,7 +55,7 @@ def init_image_info():
                 shoot_time = datetime.strptime(image_exif[306], "%Y:%m:%d %H:%M:%S")
 
                 shoot_date = datetime.strftime(shoot_time, "%Y-%m-%d")
-                if shoot_date not in date_list:
+                if shoot_date not in image_dict:
                     days = (shoot_time - birthday).days
                     date_list.append([shoot_date, days])
                     tmp_set = set()
