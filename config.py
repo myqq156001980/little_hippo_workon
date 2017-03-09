@@ -1,2 +1,2 @@
 image_path = "static/img"
-birthday = '2017-03-05'
+birthday = '2017-02-17'
