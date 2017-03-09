@@ -60,7 +60,7 @@ def init_image_info():
     date_list.sort(key=lambda x: x[1], reverse=True)
 
 
-@app.route('/<current_page>')
+@app.route('/hippo_show/<current_page>')
 def show_image(current_page):
     result_list = date_list[(int(current_page) - 1) * 10: int(current_page) * 10]
     return render_template('hippo_show.html',
@@ -72,7 +72,7 @@ def show_image(current_page):
 
 @app.route('/')
 def home_page():
-    return redirect('/1')
+    return redirect('/hippo_show/1')
 
 
 # @app.route('/add', methods=['POST'])
